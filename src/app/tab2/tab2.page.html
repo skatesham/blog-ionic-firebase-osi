@@ -1,17 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Creating an Post
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <form (ngSubmit)="createPost()">
+    <ion-item>
+      <ion-label>Title</ion-label>
+      <ion-input type="text" [(ngModel)]="post.title" name="title" minlength="3" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Content</ion-label>
+      <ion-textarea [(ngModel)]="post.content" name="description" rows="5" minlength="10" required></ion-textarea>
+      <!-- <ckeditor [(ngModel)]="post.content" [editor]="Editor" [ngModelOptions]="{standalone: true}"></ckeditor> -->
+    </ion-item>
+    <ion-button expand="block" color="success" type="submit" size="large">Success</ion-button>
+  </form>
+  
 </ion-content>
