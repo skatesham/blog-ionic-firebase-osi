@@ -1,4 +1,4 @@
-import { UuidGenerator } from '../core/tools/generate-uuid';
+import { UuidGenerator } from '../tools/generate-uuid';
 import { PostDTO } from './post-interface';
 import { DatePipe } from '@angular/common';
 
