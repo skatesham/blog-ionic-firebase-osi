@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
-import { Post } from '../models/post-model';
+import { Post } from '../core/models/post-model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,48 +11,68 @@ export class PostService {
 
   constructor() { }
 
-  create(post:Post) {
+  create(post: Post) {
     return firebase
-    .firestore()
-    .collection('posts')
-    .add(post);
+      .firestore()
+      .collection('posts')
+      .doc(post.getId()).set(post.getDTO());
   }
 
-  getAll(post:Post) {
+  getAll() {
     return firebase
-    .firestore()
-    .collection('posts')
-    .get();
+      .firestore()
+      .collection('posts')
+      .orderBy('id')
+      .get();
+  }
+
+  getFirstPage(size: number) {
+    return firebase
+      .firestore()
+      .collection('posts')
+      .orderBy('id')
+      .limit(size)
+      .get();
+  }
+
+  getPage(post: Post, size: number) {
+    return firebase
+      .firestore()
+      .collection('posts')
+      .orderBy('id')
+      .startAfter(post)
+      .limit(size)
+      .get();
   }
 
   getById(postId: string) {
     return firebase
-    .firestore()
-    .collection('posts')
-    .doc(postId).get()
+      .firestore()
+      .collection('posts')
+      .doc(postId).get()
   }
 
-  update(post:Post) {
+  update(post: Post) {
     return firebase
-    .firestore()
-    .collection('posts')
-    .doc(post.id)
-    .update(post);
+      .firestore()
+      .collection('posts')
+      .doc(post.getId())
+      .update(post.getDTO());
   }
 
-  patch(post) {
+  patch(post: Post) {
     return firebase.firestore()
-    .collection('posts')
-    .doc(post.id)
-    .set(post, {merge: true});
+      .collection('posts')
+      .doc(post.getId())
+      .set(post.getDTO(), { merge: true });
   }
 
-  remove(postId): Promise<any> {
+  remove(postId: string): Promise<any> {
     return firebase
-    .firestore()
-    .collection('posts')
-    .doc(postId)
-    .delete();
+      .firestore()
+      .collection('posts')
+      .doc(postId)
+      .delete();
   }
 
 
