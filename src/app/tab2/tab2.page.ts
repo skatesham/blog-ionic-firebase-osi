@@ -11,6 +11,7 @@ import { AlertController } from '@ionic/angular';
 export class Tab2Page {
 
   post:Post = new Post();
+  
   constructor(private postService:PostService, private alertCtrl: AlertController) {
 
   }

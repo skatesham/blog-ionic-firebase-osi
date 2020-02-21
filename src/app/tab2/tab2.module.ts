@@ -13,7 +13,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
     FormsModule,
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab2Page }],
-    )
+    ),
+    
   ],
   declarations: [Tab2Page]
 })
