@@ -1,6 +1,6 @@
-import { PostService } from './../services/post.service';
+import { PostService } from '../../services/post.service';
 import { Component } from '@angular/core';
-import { Post } from '../models/post-model';
+import { Post } from '../../core/models/post-model';
 import { AlertController } from '@ionic/angular';
 
 @Component({
