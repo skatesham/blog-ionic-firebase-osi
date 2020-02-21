@@ -18,10 +18,30 @@ export class PostService {
       .doc(post.getId()).set(post.getDTO());
   }
 
-  getAll(post: Post) {
+  getAll() {
     return firebase
       .firestore()
       .collection('posts')
+      .orderBy('id')
+      .get();
+  }
+
+  getFirstPage(size: number) {
+    return firebase
+      .firestore()
+      .collection('posts')
+      .orderBy('id')
+      .limit(size)
+      .get();
+  }
+
+  getPage(post: Post, size: number) {
+    return firebase
+      .firestore()
+      .collection('posts')
+      .orderBy('id')
+      .startAfter(post)
+      .limit(size)
       .get();
   }
 
